@@ -17,27 +17,13 @@ __author__="Adam Schubert <adam.schubert@sg1-game.net>"
 __date__ ="$6.10.2014 5:12:30$"
 
 class DwaException(Exception):
-  def __init__(self, status, data):
+  def __init__(self, status, output):
     Exception.__init__(self)
     self.status = status
-    self.data = data
-
-  @property
-  def status(self):
-    """
-    The status returned by the Dwa
-    """
-    return self.status
-
-  @property
-  def data(self):
-    """
-    The (decoded) data returned by the Dwa
-    """
-    return self.data
+    self.output = output
 
   def __str__(self):
-    return str(self.status) + " " + str(self.data)
+    return str(self.status) + " " + str(self.output)
     
 class BadCredentialsException(DwaException):
   """
@@ -52,4 +38,9 @@ class UnknownObjectException(DwaException):
 class ServerErrorException(DwaException):
   """
   Exception raised in case when server fails to procces request (when Dwa replies with a 500 http status)
+  """
+  
+class BadRequestException(DwaException):
+  """
+  Exception raised in case when server fails to understand request (when Dwa replies with a 400 http status)
   """

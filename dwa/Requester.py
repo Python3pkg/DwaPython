@@ -79,7 +79,7 @@ class Requester:
     elif status == 404 and output.get("message") == "404: Not Found":
       exp = DwaException.UnknownObjectException
     else:
-      exp = DwaException.DwaException
+      exp = DwaException.BadRequestException
     return exp(status, output)
 
   def structuredFromJson(self, data):
@@ -117,7 +117,10 @@ class Requester:
     return self.requestRaw(type, url, requestHeaders, encodedInput)
 
   def buildUrl(self, url, parameters):
-    return urljoin(self.baseUrl, str(self.version) + url + '/' + self.token) + '?' + urlencode(parameters)
+    final = urljoin(self.baseUrl, str(self.version) + url + '/' + self.token)
+    if (len(parameters) > 0):
+      final += '?' + urlencode(parameters)
+    return final 
 
 
   def requestRaw(self, type, url, requestHeaders, input):
