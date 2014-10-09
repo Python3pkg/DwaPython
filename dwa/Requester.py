@@ -74,9 +74,9 @@ class Requester:
   def createException(self, status, headers, output):
     if status == 500:
       exp = DwaException.ServerErrorException
-    elif status == 401 and output.get("message") == "Unauthorized access (Wrong api token)":
+    elif status == 401:
       exp = DwaException.BadCredentialsException
-    elif status == 404 and output.get("message") == "404: Not Found":
+    elif status == 404:
       exp = DwaException.UnknownObjectException
     else:
       exp = DwaException.BadRequestException
