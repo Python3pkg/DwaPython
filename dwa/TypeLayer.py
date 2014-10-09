@@ -30,12 +30,7 @@ class TypeLayer:
     self.requester = Requester(apiToken, baseUrl, timeout, version, userAgent)
    
   def request(self, class_name, type_name, params = None):
-    
-    if type_name in ['token', 'list', 'detail']:
-      type = 'GET'
-      input = None
-      parameters = params
-    elif type_name in ['create']:
+    if type_name in ['create']:
       type = 'POST'
       input = params
       parameters = None
@@ -47,6 +42,10 @@ class TypeLayer:
       type = 'PUT'
       input = params
       parameters = None
+    else:
+      type = 'GET'
+      input = None
+      parameters = params
     
     url = '/{class_name}/{type_name}'.format(class_name=class_name, type_name=type_name)
-    return self.requester.requestJsonCheck(type, url, parameters, input)
+    return self.requester.requestJsonCheck(type, url, parameters, input)[1]
