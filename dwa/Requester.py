@@ -19,9 +19,10 @@ __date__ ="$6.10.2014 5:09:42$"
 import logging
 import json
 import http.client as httplib
-import urllib
 import sys
 from urllib.parse import urljoin
+from urllib.parse import urlencode
+from urllib.parse import urlparse
 
 isPython3 = sys.version_info >= (3, 0)
 
@@ -45,7 +46,7 @@ class Requester:
   def __init__(self, token, baseUrl, timeout, version, userAgent):
     self.token = token
     self.baseUrl = baseUrl
-    baseUrlParsed = urllib.parse.urlparse(baseUrl)
+    baseUrlParsed = urlparse(baseUrl)
     self.hostname = baseUrlParsed.hostname
     self.port = baseUrlParsed.port
     self.prefix = baseUrlParsed.path
@@ -108,7 +109,7 @@ class Requester:
     requestHeaders["User-Agent"] = self.userAgent
 
     url = self.buildUrl(url, parameters)
-
+    print (url)
     encodedInput = "null"
     if input is not None:
       requestHeaders["Content-Type"], encodedInput = encode(input)
@@ -116,8 +117,7 @@ class Requester:
     return self.requestRaw(type, url, requestHeaders, encodedInput)
 
   def buildUrl(self, url, parameters):
-    parameters['api_token'] = self.token
-    return urljoin(self.baseUrl, str(self.version) + url.format(**parameters))
+    return urljoin(self.baseUrl, str(self.version) + url + '/' + self.token) + '?' + urlencode(parameters)
 
 
   def requestRaw(self, type, url, requestHeaders, input):

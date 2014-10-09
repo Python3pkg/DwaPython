@@ -14,13 +14,40 @@
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 __author__="Adam Schubert <adam.schubert@sg1-game.net>"
-__date__ ="$8.10.2014 1:44:13$"
+__date__ ="$6.10.2014 5:09:42$"
+
+
+
+from dwa.Requester import Requester
+#from dwa.TypeLayer import TypeLayer
+
+DEFAULT_BASE_URL = "http://api.divine-warfare.com"
+DEFAULT_VERSION = 1.0
+DEFAULT_TIMEOUT = 10
 
 class TypeLayer:
-  
-  def __init__(self, name):
-    print(name)
 
-  def __getattr__(self, name, params = None):
-    print(name)
-    print(params)
+  def __init__(self, apiToken=None, baseUrl=DEFAULT_BASE_URL, timeout=DEFAULT_TIMEOUT, version=DEFAULT_VERSION, userAgent='DwaPython'):
+    self.requester = Requester(apiToken, baseUrl, timeout, version, userAgent)
+   
+  def request(self, class_name, type_name, params = None):
+    
+    if type_name in ['token', 'list', 'detail']:
+      type = 'GET'
+      input = None
+      parameters = params
+    elif type_name in ['create']:
+      type = 'POST'
+      input = params
+      parameters = None
+    elif type_name in ['delete']:
+      type = 'DEL'
+      input = params
+      parameters = None
+    elif type_name in ['password']:
+      type = 'PUT'
+      input = params
+      parameters = None
+    
+    url = '/{class_name}/{type_name}'.format(class_name=class_name, type_name=type_name)
+    return self.requester.requestJsonCheck(type, url, parameters, input)

@@ -14,16 +14,18 @@
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 __author__="Adam Schubert <adam.schubert@sg1-game.net>"
-__date__ ="$8.10.2014 5:07:56$"
+__date__ ="$8.10.2014 1:44:13$"
 
-from dwa.ClassLayer import ClassLayer
+from dwa.TypeLayer import TypeLayer
 
-class Dwa:
+class ClassLayer:
   
-   def __init__(self, api_key):
-     self.api_key = api_key
-  
-   def __getattr__(self, className):
-    def function():
-      return ClassLayer(self.api_key, className)
+  type = None
+  def __init__(self, api_key, class_name):
+    self.typeLayer = TypeLayer(api_key)
+    self.class_name = class_name
+
+  def __getattr__(self, type_name):
+    def function(params):
+      return (self.typeLayer.request(self.class_name, type_name, params))
     return function
