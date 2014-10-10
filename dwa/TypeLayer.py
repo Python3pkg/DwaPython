@@ -35,7 +35,7 @@ class TypeLayer:
       input = params
       parameters = None
     elif type_name in ['delete']:
-      type = 'DEL'
+      type = 'DELETE'
       input = params
       parameters = None
     elif type_name in ['password']:
