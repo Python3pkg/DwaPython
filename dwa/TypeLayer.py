@@ -36,8 +36,8 @@ class TypeLayer:
       parameters = None
     elif type_name in ['delete']:
       type = 'DELETE'
-      input = params
-      parameters = None
+      input = None
+      parameters = params
     elif type_name in ['password']:
       type = 'PUT'
       input = params
