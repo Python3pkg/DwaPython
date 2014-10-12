@@ -19,3 +19,5 @@ __date__ ="$12.10.2014 1:49:02$"
 from UserTest import *
 from ApiTest import *
 from ClanTest import *
+from CharacterTest import *
+from ServerTest import *
