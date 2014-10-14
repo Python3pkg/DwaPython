@@ -18,13 +18,24 @@ __date__ ="$6.10.2014 5:09:42$"
 
 import logging
 import json
-import http.client as httplib
+
 import sys
-from urllib.parse import urljoin
-from urllib.parse import urlencode
-from urllib.parse import urlparse
+
+
 
 isPython3 = sys.version_info >= (3, 0)
+
+if isPython3:
+  import http.client as httplib
+  from urllib.parse import urljoin
+  from urllib.parse import urlencode
+  from urllib.parse import urlparse
+else:
+  import httplib 
+  from urlparse import urljoin
+  from urllib import urlencode
+  from urlparse import urlparse
+
 
 import dwa.DwaException as DwaException
 
