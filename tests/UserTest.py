@@ -24,10 +24,10 @@ class UserTest(DwaTestCase.DwaTestCase):
     DwaTestCase.DwaTestCase.setUp(self)
     self.user = self.d.user()
   
-  @unittest.skip("This test is skipped till ACL is implemented")
-  def testCreate(self):
-    message = self.user.create(self.credential)['message']
-    self.assertEqual(message, 'User created')
+  #@unittest.skip("This test is skipped till ACL is implemented")
+  #def testCreate(self):
+  #  message = self.user.create(self.credential)['message']
+  #  self.assertEqual(message, 'User created')
     
   def testList(self):
     data = self.user.list({'limit': 20, 'page': 0})
