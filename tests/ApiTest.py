@@ -16,13 +16,13 @@
 __author__="Adam Schubert <adam.schubert@sg1-game.net>"
 __date__ ="$12.10.2014 3:35:14$"
 
-import TestCase
+import tests.DwaTestCase as DwaTestCase
 
-class ApiTest(TestCase.TestCase):
+class ApiTest(DwaTestCase.DwaTestCase):
   def setUp(self):
-    TestCase.TestCase.setUp(self)
+    DwaTestCase.DwaTestCase.setUp(self)
     self.api = self.d.api()
-    self.user_data = self.d.user().user.token(self.credential)
+    self.user_data = self.d.user().token(self.credential)
 
   def testCreate(self):
     data = self.api.create({'user_token': self.user_data['token'], 'user_id': self.user_data['id']})
@@ -30,9 +30,9 @@ class ApiTest(TestCase.TestCase):
     self.assertEqual(len(data['token']), 32)
     
   def testList(self):
-    data = self.api.list({'limit': 20, 'page': 0, 'user_token': self.user_data['token'], 'user_id': self.user_data['id']})
+    data = self.api.list({'limit': 1, 'page': 0, 'user_token': self.user_data['token'], 'user_id': self.user_data['id']})
     self.assertEqual(data['message'], 'OK')
-    self.assertEqual(len(data['data']), 20)
+    self.assertEqual(len(data['data']), 1)
     self.assertIsNotNone(data['pages'])
     
   def testDelete(self):

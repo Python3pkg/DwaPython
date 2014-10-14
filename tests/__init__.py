@@ -14,10 +14,4 @@
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 __author__="Adam Schubert <adam.schubert@sg1-game.net>"
-__date__ ="$12.10.2014 1:49:02$"
-
-from UserTest import *
-from ApiTest import *
-from ClanTest import *
-from CharacterTest import *
-from ServerTest import *
+__date__ ="$12.10.2014 1:53:16$" 

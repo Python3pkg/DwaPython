@@ -29,7 +29,7 @@ if __name__ == "__main__":
         long_description=open('README.md').read(),
         packages=[
             "dwa",
-            "dwa.tests",
+            "tests"
         ],
         classifiers=[
             "Development Status :: 5 - Production/Stable",
@@ -47,5 +47,5 @@ if __name__ == "__main__":
             "Programming Language :: Python :: 3.3",
             "Topic :: Software Development",
         ],
-        test_suite="dwa.tests.AllTests"
+        test_suite="tests.AllTests"
     )

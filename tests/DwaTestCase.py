@@ -14,4 +14,20 @@
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 __author__="Adam Schubert <adam.schubert@sg1-game.net>"
-__date__ ="$12.10.2014 1:53:16$"
+__date__ ="$12.10.2014 2:28:12$"
+
+
+import unittest
+import dwa
+import os
+
+
+class DwaTestCase(unittest.TestCase):
+  def setUp(self):
+    unittest.TestCase.setUp(self)
+    api_key = open(os.path.join(os.path.dirname(os.path.abspath(__file__)), 'api_token.conf')).read()
+    self.d = dwa.Dwa(api_key)
+    self.credential = {'password': api_key, 'username': 'unittest-' + api_key}
+        
+
+

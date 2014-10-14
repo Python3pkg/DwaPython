@@ -14,23 +14,23 @@
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 __author__="Adam Schubert <adam.schubert@sg1-game.net>"
-__date__ ="$12.10.2014 3:59:06$"
+__date__ ="$12.10.2014 4:14:34$"
 
-import TestCase
+import tests.DwaTestCase as DwaTestCase
 
-class ClanTest(TestCase.TestCase):
+class CharacterTest(DwaTestCase.DwaTestCase):
   def setUp(self):
-    TestCase.TestCase.setUp(self)
-    self.clan = self.d.clan()
+    DwaTestCase.DwaTestCase.setUp(self)
+    self.server = self.d.server()
 
   def testList(self):
-    data = self.clan.list({'limit': 20, 'page': 0})
+    data = self.server.list({'limit': 1, 'page': 0})
     self.assertEqual(data['message'], 'OK')
-    self.assertEqual(len(data['data']), 20)
+    self.assertEqual(len(data['data']), 1)
     self.assertIsNotNone(data['pages'])
     
   def testDetail(self):
-    data = self.clan.detail({'server_id': 1, 'clan_id': 2})
+    data = self.server.detail({'server_id': 1})
     self.assertEqual(data['message'], 'OK')
     self.assertEqual(len(data['data']), 7)
 

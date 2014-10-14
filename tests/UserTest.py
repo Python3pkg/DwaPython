@@ -16,11 +16,11 @@
 __author__="Adam Schubert <adam.schubert@sg1-game.net>"
 __date__ ="$12.10.2014 2:20:45$"
 
-import TestCase
+import tests.DwaTestCase as DwaTestCase
 
-class UserTest(TestCase.TestCase):
+class UserTest(DwaTestCase.DwaTestCase):
   def setUp(self):
-    TestCase.TestCase.setUp(self)
+    DwaTestCase.DwaTestCase.setUp(self)
     self.user = self.d.user()
 
   def testCreate(self):

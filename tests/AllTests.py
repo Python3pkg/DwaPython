@@ -14,24 +14,10 @@
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 __author__="Adam Schubert <adam.schubert@sg1-game.net>"
-__date__ ="$12.10.2014 4:14:34$"
+__date__ ="$12.10.2014 1:49:02$"
 
-import TestCase
-
-class CharacterTest(TestCase.TestCase):
-  def setUp(self):
-    TestCase.TestCase.setUp(self)
-    self.server = self.d.server()
-
-  def testList(self):
-    data = self.clan.list({'limit': 20, 'page': 0})
-    self.assertEqual(data['message'], 'OK')
-    self.assertEqual(len(data['data']), 20)
-    self.assertIsNotNone(data['pages'])
-    
-  def testDetail(self):
-    data = self.clan.detail({'server_id': 1})
-    self.assertEqual(data['message'], 'OK')
-    self.assertEqual(len(data['data']), 7)
-
-    
+from tests.UserTest import *
+from tests.ApiTest import *
+from tests.ClanTest import *
+from tests.CharacterTest import *
+from tests.ServerTest import *
