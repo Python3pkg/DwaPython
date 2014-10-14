@@ -25,7 +25,9 @@ import os
 class DwaTestCase(unittest.TestCase):
   def setUp(self):
     unittest.TestCase.setUp(self)
-    api_key = open(os.path.join(os.path.dirname(os.path.abspath(__file__)), 'api_token.conf')).read()
+    conf_file = open(os.path.join(os.path.dirname(os.path.abspath(__file__)), 'api_token.conf'))
+    api_key = conf_file.read().strip()
+    conf_file.close()
     self.d = dwa.Dwa(api_key)
     self.credential = {'password': api_key, 'username': 'unittest-' + api_key}
         
