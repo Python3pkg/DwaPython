@@ -25,9 +25,14 @@ class UserTest(DwaTestCase.DwaTestCase):
     self.user = self.d.user()
   
   #@unittest.skip("This test is skipped till ACL is implemented")
-  #def testCreate(self):
-  #  message = self.user.create(self.credential)['message']
-  #  self.assertEqual(message, 'User created')
+  def testCreate(self):
+    params = {}
+    params['password'] = self.credential['password']
+    params['username'] = self.credential['username']
+    params['email'] = self.credential['username'] + '@divine-warfare.com'
+    params['active'] = True
+    message = self.user.create(params)['message']
+    self.assertEqual(message, 'User created')
     
   def testList(self):
     data = self.user.list({'limit': 20, 'page': 0})
@@ -49,5 +54,5 @@ class UserTest(DwaTestCase.DwaTestCase):
     
   def testActive(self):
     data_token = self.user.token(self.credential)
-    data = self.user.active({'user_id': data_token['id'], 'active': 1})
+    data = self.user.active({'user_id': data_token['id'], 'active': True})
     self.assertEqual(data['message'], 'User activated/deactivated')
