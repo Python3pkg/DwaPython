@@ -47,3 +47,7 @@ class UserTest(DwaTestCase.DwaTestCase):
     data = self.user.password({'old_password': self.credential['password'], 'new_password': self.credential['password'], 'user_token': data_token['token'], 'user_id': data_token['id']})
     self.assertEqual(data['message'], 'Password changed')
     
+  def testActive(self):
+    data_token = self.user.token(self.credential)
+    data = self.user.active({'user_id': data_token['id'], 'active': 1})
+    self.assertEqual(data['message'], 'User activated/deactivated')
