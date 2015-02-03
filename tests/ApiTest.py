@@ -25,7 +25,7 @@ class ApiTest(DwaTestCase.DwaTestCase):
     self.user_data = self.d.user().token(self.credential)
 
   def testCreate(self):
-    data = self.api.create({'user_token': self.user_data['token'], 'user_id': self.user_data['id']})
+    data = self.api.create({'user_token': self.user_data['token'], 'user_id': self.user_data['id'], 'description': 'UNIT TESTING API Token'})
     self.assertEqual(data['message'], 'Token created')
     self.assertEqual(len(data['token']), 32)
     
@@ -36,8 +36,8 @@ class ApiTest(DwaTestCase.DwaTestCase):
     self.assertIsNotNone(data['pages'])
     
   def testDelete(self):
-    data_token = self.api.create({'user_token': self.user_data['token'], 'user_id': self.user_data['id']})
-    data = self.api.delete({'user_token': self.user_data['token'], 'user_id': self.user_data['id'], 'token': data_token['token']})
+    data_token = self.api.create({'user_token': self.user_data['token'], 'user_id': self.user_data['id'], 'description': 'UNIT TESTING API Token'})
+    data = self.api.delete({'user_token': self.user_data['token'], 'user_id': self.user_data['id'], 'token_id': data_token['id']})
     self.assertEqual(data['message'], 'Token deleted')
 
     

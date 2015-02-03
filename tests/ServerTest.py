@@ -32,6 +32,6 @@ class CharacterTest(DwaTestCase.DwaTestCase):
   def testDetail(self):
     data = self.server.detail({'server_id': 1})
     self.assertEqual(data['message'], 'OK')
-    self.assertEqual(len(data['data']), 7)
+    self.assertEqual(len(data['data']), 4)
 
     
