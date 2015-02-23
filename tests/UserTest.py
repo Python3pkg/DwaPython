@@ -24,7 +24,7 @@ class UserTest(DwaTestCase.DwaTestCase):
     DwaTestCase.DwaTestCase.setUp(self)
     self.user = self.d.user()
   
-  #@unittest.skip("This test is skipped till ACL is implemented")
+  @unittest.skip("This test is skipped till ACL is implemented")
   def testCreate(self):
     params = {}
     params['password'] = self.credential['password']
