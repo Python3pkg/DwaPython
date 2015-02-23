@@ -15,7 +15,7 @@
 
 import setuptools
 
-version = "1.1"
+version = "1.1.3"
 
 
 if __name__ == "__main__":
