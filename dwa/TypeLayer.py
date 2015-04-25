@@ -30,7 +30,7 @@ class TypeLayer:
     self.requester = Requester(apiToken, baseUrl, timeout, version, userAgent)
    
   def request(self, class_name, type_name, params = None):
-    if type_name in ['create']:
+    if type_name in ['create', 'request-password-reset']:
       type = 'POST'
       input = params
       parameters = None
@@ -38,7 +38,7 @@ class TypeLayer:
       type = 'DELETE'
       input = None
       parameters = params
-    elif type_name in ['password', 'active']:
+    elif type_name in ['password', 'active', 'do-password-reset']:
       type = 'PUT'
       input = params
       parameters = None
