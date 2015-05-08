@@ -91,3 +91,14 @@ class UserTest(DwaTestCase.DwaTestCase):
     data = self.user.active({'user_id': data_token['id'], 'active': False, 'user_token': data_token['token']})
     self.assertEqual(data['message'], 'User deactivated')
     
+  def testRequestPasswordReset(self):
+    email = self.credential['username'] + '@divine-warfare.com';
+    data = self.user.request_password_reset({'email': email, 'email_content': 'URL: example.com/password/reset/{reset_token}', 'email_subject': 'Password reset unittest', 'email_from': 'unittest@example.com'})
+    self.assertEqual(data['message'], 'Email with reset token has been send')
+    
+  @unittest.expectedFailure
+  def testDoPasswordReset(self):
+    #we use USER token as password reset token, cos we dont have reset token (and we cant have it cos it is only in email) so this call will fail, and that is a good thing :)
+    data_token = self.user.token(self.credential)
+    data = self.user.request_password_reset({'reset_token': data_token['token'], 'new_password': 'newPassword'})
+    self.assertEqual(data['message'], 'Password changed')
