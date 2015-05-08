@@ -22,7 +22,6 @@ class ClassLayer:
   
   type = None
   def __init__(self, args, class_name):
-    print(args)
     self.typeLayer = TypeLayer(*args)
     self.class_name = class_name
 

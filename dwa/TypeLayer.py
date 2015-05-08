@@ -30,6 +30,9 @@ class TypeLayer:
     self.requester = Requester(apiToken, baseUrl, timeout, version, userAgent)
    
   def request(self, class_name, type_name, params = None):
+    
+    #convert python compatible type name to url format
+    type_name = type_name.replace('_', '-')
     if type_name in ['create', 'request-password-reset']:
       type = 'POST'
       input = params
