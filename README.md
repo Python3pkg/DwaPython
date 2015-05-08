@@ -19,8 +19,8 @@ Usage is simple:
 #import a library
 from dwa import Dwa
 
-#set API token
-dwa = Dwa('32len_api_token')
+#set API token and URI of api (http://api.divine-warfare.com/ or http://apitest.divine-warfare.com/ for testing purposes)
+dwa = Dwa('32len_api_token', 'http://apitest.divine-warfare.com/')
 
 #get user obj
 user = dwa.user()
