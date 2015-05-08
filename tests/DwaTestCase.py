@@ -20,7 +20,7 @@ __date__ ="$12.10.2014 2:28:12$"
 import unittest
 import dwa
 import os
-
+import time
 
 class DwaTestCase(unittest.TestCase):
   def setUp(self):
@@ -28,8 +28,26 @@ class DwaTestCase(unittest.TestCase):
     conf_file = open(os.path.join(os.path.dirname(os.path.abspath(__file__)), 'api_token.conf'))
     api_key = conf_file.read().strip()
     conf_file.close()
-    self.d = dwa.Dwa(api_key)
-    self.credential = {'password': api_key, 'username': 'unittest-' + api_key}
+    self.d = dwa.Dwa(api_key, 'http://apitest.divine-warfare.com/')
+    self.credential = {'password': api_key, 'username': 'unittest-' + api_key + str(time.time())}
+    
+    #always create user
+    params = {}
+    params['password'] = self.credential['password']
+    params['username'] = self.credential['username']
+    params['email'] = self.credential['username'] + '@divine-warfare.com'
+    params['active'] = True
+    self.d.user().create(params)
+    
+  def tearDown(self):
+    unittest.TestCase.tearDown(self)
+    #always destroy user
+    userData = self.d.user().token({'password': self.credential['password'], 'username': self.credential['username']})
+    delParams = {}
+    delParams['user_id'] = userData['id']
+    delParams['user_token'] = userData['token']
+    self.d.user().delete(delParams)
+    
         
 
 

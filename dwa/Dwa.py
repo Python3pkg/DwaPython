@@ -20,10 +20,10 @@ from dwa.ClassLayer import ClassLayer
 
 class Dwa:
   
-   def __init__(self, api_key):
-     self.api_key = api_key
+   def __init__(self, *args):
+     self.args = args
   
    def __getattr__(self, className):
     def function():
-      return ClassLayer(self.api_key, className)
+      return ClassLayer(self.args, className)
     return function

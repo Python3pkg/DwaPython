@@ -26,7 +26,7 @@ DEFAULT_TIMEOUT = 10
 
 class TypeLayer:
 
-  def __init__(self, apiToken=None, baseUrl=DEFAULT_BASE_URL, timeout=DEFAULT_TIMEOUT, version=DEFAULT_VERSION, userAgent='DwaPython'):
+  def __init__(self, apiToken=None, baseUrl=DEFAULT_BASE_URL, timeout=DEFAULT_TIMEOUT, version=DEFAULT_VERSION, userAgent='DwaPython ' + str(DEFAULT_VERSION)):
     self.requester = Requester(apiToken, baseUrl, timeout, version, userAgent)
    
   def request(self, class_name, type_name, params = None):
@@ -38,7 +38,7 @@ class TypeLayer:
       type = 'DELETE'
       input = None
       parameters = params
-    elif type_name in ['password', 'active', 'do-password-reset']:
+    elif type_name in ['password', 'active', 'do-password-reset', 'save']:
       type = 'PUT'
       input = params
       parameters = None

@@ -21,8 +21,9 @@ from dwa.TypeLayer import TypeLayer
 class ClassLayer:
   
   type = None
-  def __init__(self, api_key, class_name):
-    self.typeLayer = TypeLayer(api_key)
+  def __init__(self, args, class_name):
+    print(args)
+    self.typeLayer = TypeLayer(*args)
     self.class_name = class_name
 
   def __getattr__(self, type_name):

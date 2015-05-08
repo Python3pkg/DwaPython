@@ -18,26 +18,55 @@ __date__ ="$12.10.2014 2:20:45$"
 
 import tests.DwaTestCase as DwaTestCase
 import unittest
+import time
 
 class UserTest(DwaTestCase.DwaTestCase):
   def setUp(self):
     DwaTestCase.DwaTestCase.setUp(self)
     self.user = self.d.user()
+    self.username = self.credential['username'] + 'UserTest' + str(time.time())
   
-  @unittest.skip("This test is skipped till ACL is implemented")
   def testCreate(self):
     params = {}
     params['password'] = self.credential['password']
-    params['username'] = self.credential['username']
-    params['email'] = self.credential['username'] + '@divine-warfare.com'
+    params['username'] = self.username
+    params['email'] = self.username + '@divine-warfare.com'
     params['active'] = True
+    #create
     message = self.user.create(params)['message']
+    
+    #delete
+    userData = self.user.token({'password': params['password'], 'username': params['username']})
+    
+    delParams = {}
+    delParams['user_id'] = userData['id']
+    delParams['user_token'] = userData['token']
+    self.user.delete(delParams)
+    
     self.assertEqual(message, 'User created')
+    
+  def testDelete(self):
+    params = {}
+    params['password'] = self.credential['password']
+    params['username'] = self.username
+    params['email'] = self.username + '@divine-warfare.com'
+    params['active'] = True
+    
+    #create
+    self.user.create(params)
+    userData = self.user.token({'password': params['password'], 'username': params['username']})
+    
+    delParams = {}
+    delParams['user_id'] = userData['id']
+    delParams['user_token'] = userData['token']
+    #delete
+    message = self.user.delete(delParams)['message']
+    self.assertEqual(message, 'User deleted')
     
   def testList(self):
     data = self.user.list({'limit': 20, 'page': 0})
     self.assertEqual(data['message'], 'OK')
-    self.assertEqual(len(data['data']), 20)
+    self.assertIsNotNone(data['data'])
     self.assertIsNotNone(data['pages'])
     
   def testToken(self):
@@ -54,5 +83,11 @@ class UserTest(DwaTestCase.DwaTestCase):
     
   def testActive(self):
     data_token = self.user.token(self.credential)
-    data = self.user.active({'user_id': data_token['id'], 'active': True})
-    self.assertEqual(data['message'], 'User activated/deactivated')
+    data = self.user.active({'user_id': data_token['id'], 'active': True, 'user_token': data_token['token']})
+    self.assertEqual(data['message'], 'User activated')
+    
+  def testDeactive(self):
+    data_token = self.user.token(self.credential)
+    data = self.user.active({'user_id': data_token['id'], 'active': False, 'user_token': data_token['token']})
+    self.assertEqual(data['message'], 'User deactivated')
+    
