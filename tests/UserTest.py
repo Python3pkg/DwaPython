@@ -30,6 +30,7 @@ class UserTest(DwaTestCase.DwaTestCase):
     params = {}
     params['password'] = self.credential['password']
     params['username'] = self.username
+    params['nickname'] = self.username
     params['email'] = self.username + '@divine-warfare.com'
     params['active'] = True
     #create
@@ -49,6 +50,7 @@ class UserTest(DwaTestCase.DwaTestCase):
     params = {}
     params['password'] = self.credential['password']
     params['username'] = self.username
+    params['nickname'] = self.username
     params['email'] = self.username + '@divine-warfare.com'
     params['active'] = True
     

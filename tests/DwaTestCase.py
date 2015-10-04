@@ -35,6 +35,7 @@ class DwaTestCase(unittest.TestCase):
     params = {}
     params['password'] = self.credential['password']
     params['username'] = self.credential['username']
+    params['nickname'] = self.credential['username']
     params['email'] = self.credential['username'] + '@divine-warfare.com'
     params['active'] = True
     self.d.user().create(params)
