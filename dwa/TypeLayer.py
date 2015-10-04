@@ -41,7 +41,7 @@ class TypeLayer:
       type = 'DELETE'
       input = None
       parameters = params
-    elif type_name in ['password', 'active', 'do-password-reset', 'save']:
+    elif type_name in ['password', 'active', 'do-password-reset', 'save', 'resource-modify']:
       type = 'PUT'
       input = params
       parameters = None
