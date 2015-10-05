@@ -35,7 +35,7 @@ class DwaTestCase(unittest.TestCase):
     params = {}
     params['password'] = self.credential['password']
     params['username'] = self.credential['username']
-    params['nickname'] = self.credential['username']
+    params['nickname'] = generateNickname()
     params['email'] = self.credential['username'] + '@divine-warfare.com'
     params['active'] = True
     self.d.user().create(params)
@@ -48,6 +48,14 @@ class DwaTestCase(unittest.TestCase):
     delParams['user_id'] = userData['id']
     delParams['user_token'] = userData['token']
     self.d.user().delete(delParams)
+    
+    
+def generateNickname():
+  ret = []
+  for num in str(time.time()).replace('.', ''):
+    ret.append(chr(int(num) + ord('a')))
+    
+  return "".join(ret)
     
         
 
