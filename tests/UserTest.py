@@ -19,7 +19,6 @@ __date__ ="$12.10.2014 2:20:45$"
 import tests.DwaTestCase as DwaTestCase
 import unittest
 import time
-from DwaTestCase import generateNickname 
 
 class UserTest(DwaTestCase.DwaTestCase):
   def setUp(self):
@@ -31,7 +30,7 @@ class UserTest(DwaTestCase.DwaTestCase):
     params = {}
     params['password'] = self.credential['password']
     params['username'] = self.username
-    params['nickname'] = generateNickname()
+    params['nickname'] = DwaTestCase.generateNickname()
     params['email'] = self.username + '@divine-warfare.com'
     params['active'] = True
     #create
@@ -51,7 +50,7 @@ class UserTest(DwaTestCase.DwaTestCase):
     params = {}
     params['password'] = self.credential['password']
     params['username'] = self.username
-    params['nickname'] = generateNickname()
+    params['nickname'] = DwaTestCase.generateNickname()
     params['email'] = self.username + '@divine-warfare.com'
     params['active'] = True
     
