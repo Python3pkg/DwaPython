@@ -4,7 +4,7 @@ DwaPython
 [![Build Status](https://travis-ci.org/Salamek/DwaPython.svg?branch=master)](https://travis-ci.org/Salamek/DwaPython)
 
 
-Python library to communicate with Divine Warfare game API http://api.divine-warfare.com/doc/
+Python library to communicate with Divine Warfare game API https://api.divine-warfare.com/doc/
 
 # Installation
 
@@ -19,8 +19,8 @@ Usage is simple:
 #import a library
 from dwa import Dwa
 
-#set API token and URI of api (http://api.divine-warfare.com/ or http://apitest.divine-warfare.com/ for testing purposes)
-dwa = Dwa('32len_api_token', 'http://apitest.divine-warfare.com/')
+#set API token and URI of api (https://api.divine-warfare.com/ or https://apitest.divine-warfare.com/ for testing purposes)
+dwa = Dwa('32len_api_token', 'https://apitest.divine-warfare.com/')
 
 #get user obj
 user = dwa.user()
