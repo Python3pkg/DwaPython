@@ -13,17 +13,18 @@
 # You should have received a copy of the GNU General Public License
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-__author__="Adam Schubert <adam.schubert@sg1-game.net>"
-__date__ ="$8.10.2014 5:07:56$"
-
 from dwa.ClassLayer import ClassLayer
 
+__author__ = "Adam Schubert <adam.schubert@sg1-game.net>"
+__date__ = "$8.10.2014 5:07:56$"
+
+
 class Dwa:
-  
-   def __init__(self, *args):
-     self.args = args
-  
-   def __getattr__(self, className):
-    def function():
-      return ClassLayer(self.args, className)
-    return function
+
+    def __init__(self, *args):
+        self.args = args
+
+    def __getattr__(self, class_name):
+        def function():
+            return ClassLayer(self.args, class_name)
+        return function

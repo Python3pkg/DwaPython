@@ -13,107 +13,103 @@
 # You should have received a copy of the GNU General Public License
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-__author__="Adam Schubert <adam.schubert@sg1-game.net>"
-__date__ ="$12.10.2014 4:08:10$"
-
 import tests.DwaTestCase as DwaTestCase
 import time
 
+__author__ = "Adam Schubert <adam.schubert@sg1-game.net>"
+__date__ = "$12.10.2014 4:08:10$"
+
+
 class CharacterTest(DwaTestCase.DwaTestCase):
-  def setUp(self):
-    DwaTestCase.DwaTestCase.setUp(self)
-    self.character = self.d.character()
-    self.user_data = self.d.user().token(self.credential)
-    
-    
-    #we must create one to get data of it
-    createParams = {}
-    createParams['user_token'] = self.user_data['token']
-    createParams['server_id'] = 1
-    createParams['user_id'] = self.user_data['id']
-    createParams['faction_id'] = 1
-    createParams['name'] = 'UnitTestCharacter ' + str(time.time())
-    createParams['class'] = 1
-    createParams['x'] = 0
-    createParams['y'] = 0
-    createParams['z'] = 0
-    createParams['rotation'] = 0
-    createParams['gender'] = 1
-    createParams['max_health']  = 200
-    createParams['max_mana'] = 100
-    self.createParams = createParams
-    self.createData = self.character.create(createParams)
 
-  def testList(self):
-    listParams = {}
-    listParams['server_id'] = 1
-    #listParams['user_id'] = self.user_data['id']
-    listParams['limit'] = 20
-    listParams['page'] = 0
+    def setUp(self):
+        DwaTestCase.DwaTestCase.setUp(self)
+        self.character = self.d.character()
+        self.user_data = self.d.user().token(self.credential)
 
-    
-    listData = self.character.list(listParams)
-    self.assertEqual(listData['message'], 'OK')
-  
-  def testSave(self):
-    saveParams = {}
-    saveParams['user_token'] = self.user_data['token']
-    saveParams['user_id'] = self.user_data['id']
-    saveParams['character_id'] = self.createData['id']
-    saveParams['x'] = 10
-    saveParams['y'] = 20
-    saveParams['z'] = 30
-    saveParams['health'] = 300
-    saveParams['mana'] = 200
-    saveParams['rotation'] = 0
-    saveParams['reputation'] = 200
-    saveParams['max_health'] = 500
-    saveParams['max_mana'] = 1000
-    saveParams['inventory'] = []
+        # we must create one to get data of it
+        create_params = {}
+        create_params['user_token'] = self.user_data['token']
+        create_params['server_id'] = 1
+        create_params['user_id'] = self.user_data['id']
+        create_params['faction_id'] = 1
+        create_params['name'] = 'UnitTestCharacter ' + str(time.time())
+        create_params['class'] = 1
+        create_params['x'] = 0
+        create_params['y'] = 0
+        create_params['z'] = 0
+        create_params['rotation'] = 0
+        create_params['gender'] = 1
+        create_params['max_health'] = 200
+        create_params['max_mana'] = 100
+        self.create_params = create_params
+        self.createData = self.character.create(create_params)
 
-    
-    saveData = self.character.save(saveParams)
-    self.assertEqual(saveData['message'], 'Character saved')
-    
-  def testDetail(self):
-    detailParams = {}
-    detailParams['user_token'] = self.user_data['token']
-    detailParams['user_id'] = self.user_data['id']
-    detailParams['character_id'] = self.createData['id']
+    def test_list(self):
+        list_params = {}
+        list_params['server_id'] = 1
+        # list_params['user_id'] = self.user_data['id']
+        list_params['limit'] = 20
+        list_params['page'] = 0
 
-    
-    detailData = self.character.detail(detailParams)
-    self.assertEqual(detailData['message'], 'OK')
-    
-  def testCreate(self):
-    createParams = {}
-    createParams['user_token'] = self.user_data['token']
-    createParams['server_id'] = 1
-    createParams['user_id'] = self.user_data['id']
-    createParams['faction_id'] = 1
-    createParams['name'] = 'UnitTestCharacter ' + str(time.time())
-    createParams['class'] = 1
-    createParams['x'] = 0
-    createParams['y'] = 0
-    createParams['z'] = 0
-    createParams['rotation'] = 0
-    createParams['gender'] = 1
-    createParams['max_health']  = 200
-    createParams['max_mana'] = 100
-    
-    createData = self.character.create(createParams)
-    
-    self.assertEqual(createData['message'], 'Character created')
-    self.assertIs(type(createData['id']), int)
-  
-  def testDelete(self):
-    deleteParams = {}
-    deleteParams['user_token'] = self.user_data['token']
-    deleteParams['user_id'] = self.user_data['id']
-    deleteParams['character_id'] = self.createData['id']
-    
-    createData = self.character.delete(deleteParams)
-    
-    self.assertEqual(createData['message'], 'Character deleted')
+        list_data = self.character.list(list_params)
+        self.assertEqual(list_data['message'], 'OK')
 
-    
+    def test_save(self):
+        save_params = {}
+        save_params['user_token'] = self.user_data['token']
+        save_params['user_id'] = self.user_data['id']
+        save_params['character_id'] = self.createData['id']
+        save_params['x'] = 10
+        save_params['y'] = 20
+        save_params['z'] = 30
+        save_params['health'] = 300
+        save_params['mana'] = 200
+        save_params['rotation'] = 0
+        save_params['reputation'] = 200
+        save_params['max_health'] = 500
+        save_params['max_mana'] = 1000
+        save_params['inventory'] = []
+
+        save_data = self.character.save(save_params)
+        self.assertEqual(save_data['message'], 'Character saved')
+
+    def test_detail(self):
+        detail_params = {}
+        detail_params['user_token'] = self.user_data['token']
+        detail_params['user_id'] = self.user_data['id']
+        detail_params['character_id'] = self.createData['id']
+
+        detail_data = self.character.detail(detail_params)
+        self.assertEqual(detail_data['message'], 'OK')
+
+    def test_create(self):
+        create_params = {}
+        create_params['user_token'] = self.user_data['token']
+        create_params['server_id'] = 1
+        create_params['user_id'] = self.user_data['id']
+        create_params['faction_id'] = 1
+        create_params['name'] = 'UnitTestCharacter ' + str(time.time())
+        create_params['class'] = 1
+        create_params['x'] = 0
+        create_params['y'] = 0
+        create_params['z'] = 0
+        create_params['rotation'] = 0
+        create_params['gender'] = 1
+        create_params['max_health'] = 200
+        create_params['max_mana'] = 100
+
+        create_data = self.character.create(create_params)
+
+        self.assertEqual(create_data['message'], 'Character created')
+        self.assertIs(type(create_data['id']), int)
+
+    def test_delete(self):
+        delete_params = {}
+        delete_params['user_token'] = self.user_data['token']
+        delete_params['user_id'] = self.user_data['id']
+        delete_params['character_id'] = self.createData['id']
+
+        delete_data = self.character.delete(delete_params)
+
+        self.assertEqual(delete_data['message'], 'Character deleted')

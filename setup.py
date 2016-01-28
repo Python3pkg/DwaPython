@@ -15,7 +15,7 @@
 
 import setuptools
 
-version = "1.2.1"
+version = "2.0.0"
 
 
 if __name__ == "__main__":
@@ -47,5 +47,5 @@ if __name__ == "__main__":
             "Programming Language :: Python :: 3.3",
             "Topic :: Software Development",
         ],
-        test_suite="tests.AllTests"
+        test_suite="tests"
     )

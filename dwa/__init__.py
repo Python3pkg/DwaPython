@@ -13,9 +13,9 @@
 # You should have received a copy of the GNU General Public License
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-__author__="Adam Schubert <adam.schubert@sg1-game.net>"
-__date__ ="$6.10.2014 5:09:42$"
-
-import logging
-
 from dwa.Dwa import Dwa
+
+__author__ = "Adam Schubert <adam.schubert@sg1-game.net>"
+__date__ = "$6.10.2014 5:09:42$"
+
+__all__ = ['Dwa']

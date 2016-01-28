@@ -13,46 +13,48 @@
 # You should have received a copy of the GNU General Public License
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-__author__="Adam Schubert <adam.schubert@sg1-game.net>"
-__date__ ="$12.10.2014 2:28:12$"
-
-
 import unittest
 import dwa
 import os
 import time
 
+__author__ = "Adam Schubert <adam.schubert@sg1-game.net>"
+__date__ = "$12.10.2014 2:28:12$"
+
+
 class DwaTestCase(unittest.TestCase):
-  def setUp(self):
-    unittest.TestCase.setUp(self)
-    conf_file = open(os.path.join(os.path.dirname(os.path.abspath(__file__)), 'api_token.conf'))
-    api_key = conf_file.read().strip()
-    conf_file.close()
-    self.d = dwa.Dwa(api_key, 'https://apitest.divine-warfare.com/')
-    self.credential = {'password': api_key, 'username': 'unittest-' + api_key + str(time.time())}
 
-    #always create user
-    params = {}
-    params['password'] = self.credential['password']
-    params['username'] = self.credential['username']
-    params['nickname'] = generateNickname()
-    params['email'] = self.credential['username'] + '@divine-warfare.com'
-    params['active'] = True
-    self.d.user().create(params)
+    def setUp(self):
+        unittest.TestCase.setUp(self)
+        conf_file = open(os.path.join(os.path.dirname(os.path.abspath(__file__)), 'api_token.conf'))
+        api_key = conf_file.read().strip()
+        conf_file.close()
+        self.d = dwa.Dwa(api_key, 'https://apitest.divine-warfare.com/')
+        self.credential = {'password': api_key, 'username': 'unittest-' + api_key + str(time.time())}
 
-  def tearDown(self):
-    unittest.TestCase.tearDown(self)
-    #always destroy user
-    userData = self.d.user().token({'password': self.credential['password'], 'username': self.credential['username']})
-    delParams = {}
-    delParams['user_id'] = userData['id']
-    delParams['user_token'] = userData['token']
-    self.d.user().delete(delParams)
+        # always create user
+        params = {}
+        params['password'] = self.credential['password']
+        params['username'] = self.credential['username']
+        params['nickname'] = generate_nickname()
+        params['email'] = self.credential['username'] + '@divine-warfare.com'
+        params['active'] = True
+        self.d.user().create(params)
+
+    def tearDown(self):
+        unittest.TestCase.tearDown(self)
+        # always destroy user
+        user_data = self.d.user().token(
+            {'password': self.credential['password'], 'username': self.credential['username']})
+        del_params = {}
+        del_params['user_id'] = user_data['id']
+        del_params['user_token'] = user_data['token']
+        self.d.user().delete(del_params)
 
 
-def generateNickname():
-  ret = []
-  for num in str(time.time()).replace('.', ''):
-    ret.append(chr(int(num) + ord('a')))
+def generate_nickname():
+    ret = []
+    for num in str(time.time()).replace('.', ''):
+        ret.append(chr(int(num) + ord('a')))
 
-  return "".join(ret)
+    return "".join(ret)

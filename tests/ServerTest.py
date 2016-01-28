@@ -13,25 +13,25 @@
 # You should have received a copy of the GNU General Public License
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-__author__="Adam Schubert <adam.schubert@sg1-game.net>"
-__date__ ="$12.10.2014 4:14:34$"
-
 import tests.DwaTestCase as DwaTestCase
 
-class CharacterTest(DwaTestCase.DwaTestCase):
-  def setUp(self):
-    DwaTestCase.DwaTestCase.setUp(self)
-    self.server = self.d.server()
+__author__ = "Adam Schubert <adam.schubert@sg1-game.net>"
+__date__ = "$12.10.2014 4:14:34$"
 
-  def testList(self):
-    data = self.server.list({'limit': 1, 'page': 0})
-    self.assertEqual(data['message'], 'OK')
-    self.assertEqual(len(data['data']), 1)
-    self.assertIsNotNone(data['pages'])
-    
-  def testDetail(self):
-    data = self.server.detail({'server_id': 1})
-    self.assertEqual(data['message'], 'OK')
-    self.assertEqual(len(data['data']), 4)
 
-    
+class ServerTest(DwaTestCase.DwaTestCase):
+
+    def setUp(self):
+        DwaTestCase.DwaTestCase.setUp(self)
+        self.server = self.d.server()
+
+    def test_list(self):
+        data = self.server.list({'limit': 1, 'page': 0})
+        self.assertEqual(data['message'], 'OK')
+        self.assertEqual(len(data['data']), 1)
+        self.assertIsNotNone(data['pages'])
+
+    def test_detail(self):
+        data = self.server.detail({'server_id': 1})
+        self.assertEqual(data['message'], 'OK')
+        self.assertEqual(len(data['data']), 4)

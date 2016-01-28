@@ -13,19 +13,21 @@
 # You should have received a copy of the GNU General Public License
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-__author__="Adam Schubert <adam.schubert@sg1-game.net>"
-__date__ ="$8.10.2014 1:44:13$"
-
 from dwa.TypeLayer import TypeLayer
 
-class ClassLayer:
-  
-  type = None
-  def __init__(self, args, class_name):
-    self.typeLayer = TypeLayer(*args)
-    self.class_name = class_name
+__author__ = "Adam Schubert <adam.schubert@sg1-game.net>"
+__date__ = "$8.10.2014 1:44:13$"
 
-  def __getattr__(self, type_name):
-    def function(params):
-      return (self.typeLayer.request(self.class_name, type_name, params))
-    return function
+
+class ClassLayer:
+
+    type = None
+
+    def __init__(self, args, class_name):
+        self.typeLayer = TypeLayer(*args)
+        self.class_name = class_name
+
+    def __getattr__(self, type_name):
+        def function(params):
+            return (self.typeLayer.request(self.class_name, type_name, params))
+        return function

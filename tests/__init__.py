@@ -13,5 +13,14 @@
 # You should have received a copy of the GNU General Public License
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-__author__="Adam Schubert <adam.schubert@sg1-game.net>"
-__date__ ="$12.10.2014 1:53:16$" 
+from tests.UserTest import UserTest
+from tests.ApiTest import ApiTest
+from tests.ClanTest import ClanTest
+from tests.CharacterTest import CharacterTest
+from tests.ServerTest import ServerTest
+from tests.FactionTest import FactionTest
+
+__author__ = "Adam Schubert <adam.schubert@sg1-game.net>"
+__date__ = "$12.10.2014 1:53:16$"
+
+__all__ = ['UserTest', 'ApiTest', 'ClanTest', 'CharacterTest', 'ServerTest', 'FactionTest']
