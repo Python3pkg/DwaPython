@@ -31,18 +31,18 @@ if isPython3:
   from urllib.parse import urlencode
   from urllib.parse import urlparse
 else:
-  import httplib 
-  from urlparse import urljoin
-  from urllib import urlencode
-  from urlparse import urlparse
+  import http.client 
+  from urllib.parse import urljoin
+  from urllib.parse import urlencode
+  from urllib.parse import urlparse
 
 
-import dwa.DwaException as DwaException
+from . import dwa.DwaException as DwaException
 
 
 class Requester:
-  httpConnectionClass = httplib.HTTPConnection
-  httpsConnectionClass = httplib.HTTPSConnection
+  httpConnectionClass = http.client.HTTPConnection
+  httpsConnectionClass = http.client.HTTPSConnection
 
   @classmethod
   def injectConnectionClasses(cls, httpConnectionClass, httpsConnectionClass):
@@ -51,8 +51,8 @@ class Requester:
 
   @classmethod
   def resetConnectionClasses(cls):
-    cls.httpConnectionClass = httplib.HTTPConnection
-    cls.httpsConnectionClass = httplib.HTTPSConnection
+    cls.httpConnectionClass = http.client.HTTPConnection
+    cls.httpsConnectionClass = http.client.HTTPSConnection
 
   def __init__(self, token, baseUrl, timeout, version, userAgent):
     self.token = token

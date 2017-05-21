@@ -18,7 +18,7 @@ __date__ ="$6.10.2014 5:09:42$"
 
 
 
-from dwa.Requester import Requester
+from .dwa.Requester import Requester
 
 DEFAULT_BASE_URL = "http://api.divine-warfare.com"
 DEFAULT_VERSION = 1.0

@@ -18,4 +18,4 @@ __date__ ="$6.10.2014 5:09:42$"
 
 import logging
 
-from dwa.Dwa import Dwa
+from .dwa.Dwa import Dwa

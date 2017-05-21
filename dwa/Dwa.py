@@ -16,7 +16,7 @@
 __author__="Adam Schubert <adam.schubert@sg1-game.net>"
 __date__ ="$8.10.2014 5:07:56$"
 
-from dwa.ClassLayer import ClassLayer
+from .dwa.ClassLayer import ClassLayer
 
 class Dwa:
   
